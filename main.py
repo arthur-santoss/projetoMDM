@@ -45,12 +45,13 @@ def run_selenium(login, senha):
     device_1.click()
 
     itens_click = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
-
+    time.sleep(2)
     # Clicar em todos os checkboxes
-    for item in itens_click:
+    for indice, item in enumerate(itens_click, start=1):  # Começando do índice 1
         try:
-            checkbox = driver.find_element(By.XPATH, f'//li[contains(text(),"{item}")]/label/input')
+            checkbox = driver.find_element(By.XPATH, f"//li[contains(text(), '{item}')]/label/input")
             checkbox.click()
+            print(f"Clicou no checkbox para '{item}' no índice {indice}.")
             time.sleep(1)  # Adicionar um pequeno atraso opcional entre cliques
         except:
             print(f"Item {item} não encontrado.")
