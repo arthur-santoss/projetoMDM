@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Home</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to the Home Page</h2>
+    <p>This is the home page content.</p>
+
+    <!-- Campo de Pesquisa -->
+    <div>
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search" placeholder="Enter device name...">
+      <button onclick="searchDevices()">Search</button>
+    </div>
+
+    <!-- Resultados da Pesquisa -->
+    <div id="searchResults">
+      <!-- Os resultados da pesquisa serão exibidos aqui -->
+    </div>
+
+    <ul>
+      <a href="devices/iphone13.html"><li>iPhone 13</li></a>
+      <a href="devices/Samsung_Galaxy_S21.html"><li>Samsung Galaxy S21</li></a>
+      <a href="devices/Google_Pixel_6.html"><li>Google Pixel 6</li></a>
+      <a href="devices/OnePlus_9.html"><li>OnePlus 9</li></a>
+      <a href="devices/Xiaomi_Mi_11.html"><li>Xiaomi Mi 11</li></a>
+    </ul>
+    
+
+    <a href="index.html">Logout</a>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- Adicione o link para o Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <title>Search Results</title>
+  <style>
+    /* Estilo para a grid */
+    #searchResults {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Mínimo 200px, máximo 1fr */
+      gap: 20px;
+    }
+
+    /* Estilo adicional para melhorar a apresentação */
+    .device-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .device-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Search Results</h2>
+
+    <!-- Área para exibir os resultados da pesquisa -->
+    <div id="searchResults">
+      <!-- Os resultados da pesquisa serão exibidos aqui -->
+    </div>
+
+    <a href="home.html">Back to Home</a>
+  </div>
+
+  <script>
+    // Função para exibir os resultados recebidos da pesquisa
+    function displayResults(results) {
+      var searchResultsContainer = document.getElementById("searchResults");
+
+      // Limpar resultados anteriores
+      searchResultsContainer.innerHTML = "";
+
+      // Exibir cada resultado
+      results.forEach(function(result) {
+        // Criar um bloco para representar o dispositivo e as lojas
+        var resultBlock = document.createElement("div");
+        resultBlock.className = "device-card";
+
+        // Adicionar ícone Font Awesome e texto
+        resultBlock.innerHTML = `<i class="fas fa-mobile-alt device-icon"></i><h3>${result.deviceName}</h3><p>Lojas: ${result.lojas.join(', ')}</p>`;
+        
+        searchResultsContainer.appendChild(resultBlock);
+      });
+    }
+
+    // Chamada para exibir os resultados quando a página carrega
+    window.onload = function() {
+      // Exemplo de dados de resultados (substitua isso pelos resultados reais)
+      var sampleResults = [
+        { deviceName: "iPhone 13", lojas: ["loja_001", "loja_002", "loja_003", "loja_004", "loja_005", "loja_006", "loja_007"] },
+        { deviceName: "Samsung Galaxy S21", lojas: ["loja_001", "loja_002", "loja_003", "loja_004", "loja_005", "loja_006", "loja_007"] },
+        { deviceName: "Google Pixel 6", lojas: ["loja_001", "loja_002", "loja_003", "loja_004", "loja_005", "loja_006", "loja_007"] },
+        { deviceName: "OnePlus 9", lojas: ["loja_001", "loja_002", "loja_003", "loja_004", "loja_005", "loja_006", "loja_007"] },
+        { deviceName: "Xiaomi Mi 11", lojas: ["loja_001", "loja_002", "loja_003", "loja_004", "loja_005", "loja_006", "loja_007"] }
+      ];
+
+      // Exibir os resultados na página
+      displayResults(sampleResults);
+    };
+  </script>
+</body>
+</html>
