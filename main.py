@@ -2,11 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 # Configurações do Selenium
 def run_selenium(login, senha):
-    # Inicializar o navegador (neste exemplo, usaremos o Firefox)
-    driver = webdriver.Firefox()
+    # Inicializar o navegador 
+    
+    servico = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=servico)
 
     # Abrir o site desejado
     driver.get('http://127.0.0.1:5500/index.html')
@@ -30,32 +37,38 @@ def run_selenium(login, senha):
     time.sleep(1)
 
     # Verificar se há um alerta e aceitar
-    try:
-        alert = driver.switch_to.alert
-        alert_text = alert.text
-        print(f"Alerta detectado: {alert_text}")
-        alert.accept()
-    except:
-        pass
-
+    def alert():
+        try:
+            alert = driver.switch_to.alert
+            alert_text = alert.text
+            print(f"Alerta detectado: {alert_text}")
+            alert.accept()
+        except:
+            pass
+        
+    alert()
     # Clicar em "iphone 13"
     time.sleep(1)
     device_1 = driver.find_element(By.XPATH, '/html/body/div/ul/a[1]/li')
     time.sleep(1)
     device_1.click()
-
-    itens_click = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
-    time.sleep(2)
-    # Clicar em todos os checkboxes
-    for indice, item in enumerate(itens_click, start=1):  # Começando do índice 1
-        try:
-            checkbox = driver.find_element(By.XPATH, f"//li[contains(text(), '{item}')]/label/input")
+    
+    try:
+        # Clicar em todos os checkboxes
+        for i in range(1, 7):
+            checkbox = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, f"/html/body/div/ul/li[{i}]/label/input"))
+            )
             checkbox.click()
-            print(f"Clicou no checkbox para '{item}' no índice {indice}.")
-            time.sleep(1)  # Adicionar um pequeno atraso opcional entre cliques
-        except:
-            print(f"Item {item} não encontrado.")
-
+        
+        alert()
+    except:
+        pass
+    
+    btn_enviar = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'btnEnviar')))
+    btn_enviar.click()
+    
+    
     # Fechar o navegador ao finalizar
     # driver.quit()
 

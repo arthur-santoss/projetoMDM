@@ -21,7 +21,7 @@ function login() {
   }
 
   function mostrarAlerta() {
+    window.location.href = 'file:///C:/Users/arthur/Desktop/ONE%20BIT%20CODE/Python-Automacao_III-Selenium/projetoMDM/home.html';
     alert('Ação de enviar realizada!');
-    // Adicione aqui a lógica desejada após o alerta
   }
   
