@@ -20,8 +20,8 @@ senha = open('C:\login\senha.txt', 'r').read()
 # nome_empresa
 # nome_loja
 
-nome_loja = input('Nome da loja, exemplo: l001:\n')
-num_bluebird = input('Nome do Bluebird:\n')
+nome_loja = 'l527' #input('Nome da loja, exemplo: l001:\n')
+num_bluebird = 'G865' #input('Nome do Bluebird:\n')
 
 time.sleep(1)
 
@@ -87,6 +87,7 @@ def program(): # valida se o dispositivo existe antes de executar
     drop_more.click()
 
     # clica no Products
+    time.sleep(2)
     print(f'Acessando Products do BlueBird {num_bluebird}... ')
     drop_more_products = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="device-details-products"]')))
     drop_more_products.click()
@@ -97,24 +98,38 @@ def program(): # valida se o dispositivo existe antes de executar
 
     for x in range(3): # vai fazer 3 vezes o script a baixo
         print('Carregando...')
+        time.sleep(2)
+        print('Parei no X')
 
         for N in range(8): # vai clicar em até 8 products
+            print('Parei no N')
+            time.sleep(5)
+            print('procurando o product_selected')
+            product_selected =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[1]/td[1]')))
+            print('achei o product_selected')
+            time.sleep(2)
+            for x in product_selected:
+                x.click()
+            print('cliquei no product_selected')
+            print('product_selected')
+                                            
+            # mapear o FORCE REPROCESS
+            time.sleep(2)
+            force_reprocess = driver.find_element(By.XPATH, '/html/body/main/div/div/div[3]/section/section/div/div/section[1]/div[2]/a[2]')
+            time.sleep(2)
+            force_reprocess.click()
+            time.sleep(2)
+            
             try:
-                product_selected =  WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[{N}]/td[1]')))
-                product_selected.click()
-                time.sleep(1)
                 alert()
-                alert.accept()
-                                
-                # mapear o FORCE REPROCESS
-                force_reprocess = driver.find_element(By.XPATH, '/html/body/main/div/div/div[3]/section/section/div/div/section[1]/div[2]/a[2]')
-                force_reprocess.click()
-                time.sleep(2)
-                alert()
-                alert.accept()
-                
+                print('usei o alert()')
             except:
-                pass
+                alert.accept()
+                print('usei o alert.accept()')
+
+            print('force_reprocess')
+                
+            
         print(f'looping {x+1} de 3 concluído!')
         
     # depois de reprocessar todos products clicar em More Actions > Sync Device
@@ -130,10 +145,10 @@ def program(): # valida se o dispositivo existe antes de executar
     print('Encerrado!')
 
 # tenta clicar no bluebird pesquisado
-try: # valida se o dispositivo existe antes de executar
-    btn_status_up = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="airwatchdevicelistsearch"]/section[3]/section[1]/table/tbody/tr/td[2]')))
-    btn_status_up.click()
-    program()
+# try: # valida se o dispositivo existe antes de executar
+btn_status_up = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="airwatchdevicelistsearch"]/section[3]/section[1]/table/tbody/tr/td[2]')))
+btn_status_up.click()
+program()
     
-except:
-    print('dispositivo não encontrato!')
+# except:
+#     print('dispositivo não encontrato!')
