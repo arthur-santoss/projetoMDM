@@ -115,25 +115,16 @@ def program(): # valida se o dispositivo existe antes de executar
                 print('Parei no N')
                 time.sleep(5)
                 print('procurando o product_selected')
-                # reprocessa o Conf_Pedestal
-                Conf_Pedestal =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[1]/td[1]')))
-                print('achei o Conf_Pedestal')
+                # reprocessa o product_select
+                product_select =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[{N}]/td[1]')))
+                print('achei o product_select')
                 time.sleep(2)
-                for x in Conf_Pedestal:
+                for x in product_select:
                     x.click()
-                print('cliquei no Conf_Pedestal')
+                print('cliquei no product_select')
                                                             
                 reprocess_force()
                 time.sleep(2)
-                # reprocessa o Config_Microstrategy_link
-                Config_Microstrategy_link =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[2]/td[1]')))
-                print('achei o Config_Microstrategy_link')
-                time.sleep(2)
-                for x in Config_Microstrategy_link:
-                    x.click()
-                print('cliquei no Config_Microstrategy_link')
-                                                            
-                reprocess_force()
             except:
                 pass
 
