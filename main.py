@@ -96,38 +96,50 @@ def program(): # valida se o dispositivo existe antes de executar
 
     print("\n--------REPROCESSANDO--------")
 
+    def reprocess_force():
+        # mapear o FORCE REPROCESS
+            time.sleep(2)
+            force_reprocess = driver.find_element(By.XPATH, '/html/body/main/div/div/div[3]/section/section/div/div/section[1]/div[2]/a[2]')
+            time.sleep(2)
+            force_reprocess.click()
+            time.sleep(2)
+            alert()
+
     for x in range(3): # vai fazer 3 vezes o script a baixo
         print('Carregando...')
         time.sleep(2)
         print('Parei no X')
 
         for N in range(8): # vai clicar em até 8 products
-            print('Parei no N')
-            time.sleep(5)
-            print('procurando o product_selected')
-            product_selected =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[1]/td[1]')))
-            print('achei o product_selected')
-            time.sleep(2)
-            for x in product_selected:
-                x.click()
-            print('cliquei no product_selected')
-            print('product_selected')
-                                            
-            # mapear o FORCE REPROCESS
-            time.sleep(2)
-            force_reprocess = driver.find_element(By.XPATH, '/html/body/main/div/div/div[3]/section/section/div/div/section[1]/div[2]/a[2]')
-            time.sleep(2)
-            force_reprocess.click()
-            time.sleep(2)
-            
             try:
-                alert()
-                print('usei o alert()')
+                print('Parei no N')
+                time.sleep(5)
+                print('procurando o product_selected')
+                # reprocessa o Conf_Pedestal
+                Conf_Pedestal =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[1]/td[1]')))
+                print('achei o Conf_Pedestal')
+                time.sleep(2)
+                for x in Conf_Pedestal:
+                    x.click()
+                print('cliquei no Conf_Pedestal')
+                                                            
+                reprocess_force()
+                time.sleep(2)
+                # reprocessa o Config_Microstrategy_link
+                Config_Microstrategy_link =  WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f'/html/body/main/div/div/div[3]/section/section/div/div/section[3]/section[1]/table/tbody/tr[2]/td[1]')))
+                print('achei o Config_Microstrategy_link')
+                time.sleep(2)
+                for x in Config_Microstrategy_link:
+                    x.click()
+                print('cliquei no Config_Microstrategy_link')
+                                                            
+                reprocess_force()
             except:
-                alert.accept()
-                print('usei o alert.accept()')
+                pass
 
-            print('force_reprocess')
+
+
+
                 
             
         print(f'looping {x+1} de 3 concluído!')
