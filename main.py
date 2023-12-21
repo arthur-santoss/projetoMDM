@@ -107,6 +107,21 @@ for x in range(15):
         # time.sleep(3)
         btn_status_up.click()
 
+
+        # Startando AWCM
+        time.sleep(2)
+        map_more_actions = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="MoreActionsPopup"]')))
+        map_more_actions.click()
+        time.sleep(2)
+
+        print(f'Startando AWCM...')
+        map_more_actions_start_AWCM = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="maincolumn"]/hgroup/div[2]/div/section[2]/div[6]/ul/li[1]')))
+        time.sleep(2)
+        map_more_actions_start_AWCM.click()
+        time.sleep(2)
+        alert()
+        time.sleep(2)
+
         # clica no "more"
         drop_more = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '/html/body/main/div/div/section[1]/nav/section/ul/li[4]/a')))
         drop_more.click()
@@ -171,15 +186,3 @@ for x in range(15):
 
         
         
-        
-# depois de reprocessar todos products clicar em More Actions > Sync Device
-    
-    # time.sleep(2)
-    
-
-
-    
-
-
-
-    
