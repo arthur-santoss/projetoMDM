@@ -7,6 +7,7 @@ import time
 import os
 import pandas as pd
 from datetime import datetime
+import getpass
 
 # import PhantomJS
 bluebirds_df = pd.read_excel("bluebirds.xlsx")
@@ -41,7 +42,7 @@ WhatsApp (51) 99512-4530
 
     # Exemplo de uso da função run_selenium
     login = input('Qual seu login? ') #open('C:\login\login.txt', 'r').read()
-    senha = input('Qual sua senha? ') #open('C:\login\senha.txt', 'r').read()
+    senha = getpass.getpass('Qual sua senha? ') #open('C:\login\senha.txt', 'r').read()
 
 
     nome_loja = input('Nome da loja, exemplo: l001:\n')
@@ -213,8 +214,3 @@ else:
     print('O script não está mais licenciado!')
     print('Para renovar, entre em contato comigo (51) 99512-4530')
     time.sleep(60)
-
-
-
-
-
